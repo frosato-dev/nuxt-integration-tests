@@ -1,0 +1,6 @@
+1. Create a Nuxt application with two pages:
+ - "homepage" avec comme titre "Homepage" et un lien ver la page "demo 1"
+ - demo-1 avec comme titre "Demo 1" et un lien vers la homepage
+
+2. Install playwright-ssr depuis npm et créer un test qui charge la page homepage et click sur le bouton.
+le test verifie ensuite que le title à l'écran est bien "Demo 1"
