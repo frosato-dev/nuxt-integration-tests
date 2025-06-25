@@ -9,6 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
     "test:ui": "playwright test --ui"
   },
   "dependencies": {
@@ -17,7 +19,8 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@nuxt/test-utils": "^3.19.1",
     "@playwright/test": "^1.53.1",
-    "playwright-ssr": "^0.0.3"
+    "playwright": "^1.53.1"
   }
 }
