@@ -11,6 +11,5 @@ const { data } = await useFetch<{ message: string }>(
   <div>
     <h1>Homepage</h1>
     <div v-if="data" data-testid="api">{{ data.message }}</div>
-    <NuxtLink to="/demo-1">Aller à Demo 1</NuxtLink>
   </div>
 </template>

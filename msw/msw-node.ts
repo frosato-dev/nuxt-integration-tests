@@ -1,5 +1,5 @@
 import { setupServer } from "msw/node";
-import { handlers } from "./msw-config";
+import { handlers } from "./msw-handlers";
 
 // Create the server instance
 export const server = setupServer(...handlers);

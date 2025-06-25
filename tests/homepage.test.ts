@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { startMSW, stopMSW, resetMSW, server } from "./setup/msw-node";
+import { startMSW, stopMSW, resetMSW, server } from "../msw/msw-node";
 import { http, HttpResponse } from "msw";
 
 // Setup MSW for all tests in this file
