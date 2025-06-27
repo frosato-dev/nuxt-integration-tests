@@ -1,7 +1,7 @@
 # POC MSW - Server side API call
 
 ```
- npm run test
+ npm run test:ui
 ```
 
 or

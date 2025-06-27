@@ -1,8 +1,6 @@
-import { test, expect } from "@playwright/test";
-import { http, HttpResponse } from "msw";
-import { server } from "~/msw/msw-node";
+import { expect, test } from "@playwright/test";
 
-const mockFetch = async (path: string, payload: any) => {
+const mockServerFetch = async (path: string, payload: any) => {
   return fetch("http://localhost:3000/api/msw", {
     method: "POST",
     headers: {
@@ -13,17 +11,33 @@ const mockFetch = async (path: string, payload: any) => {
 };
 
 test("homepage with custom API response", async ({ page }) => {
-  const result = await mockFetch(
+  // Mock the server-side fetch
+  await mockServerFetch(
     "https://mockanapi.com/s/6773ca761e6f1a48a311752a/test2",
     {
-      message: "TOTO",
+      message: "Server override",
+    }
+  );
+
+  // Mock the client-side fetch
+  await page.route(
+    "https://mockanapi.com/s/6773ca761e6f1a48a311752a/test2",
+    async (route) => {
+      const json = {
+        message: "Client override",
+      };
+      await route.fulfill({ json });
     }
   );
 
   await page.goto("/");
 
   // This should now show the custom response
-  await expect(page.locator("data-testid=ssr")).toContainText(
-    "custom response for this test"
+  await expect(page.locator("data-testid=server")).toContainText(
+    "Server override"
+  );
+  // This should now show the custom response
+  await expect(page.locator("data-testid=client")).toContainText(
+    "Client override"
   );
 });
