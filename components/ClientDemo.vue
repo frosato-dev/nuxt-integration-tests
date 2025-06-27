@@ -8,11 +8,5 @@ const { data } = await useFetch<{ message: string }>(
 </script>
 
 <template>
-  <div>
-    <h1>Homepage</h1>
-    <div v-if="data" data-testid="api">{{ data.message }}</div>
-    <ClientOnly>
-      <ClientDemo />
-    </ClientOnly>
-  </div>
+  <div v-if="data" data-testid="client">{{ data.message }}</div>
 </template>

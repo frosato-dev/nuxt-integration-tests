@@ -9,4 +9,9 @@ export default defineNuxtPlugin(async () => {
       onUnhandledRequest: "bypass",
     });
   }
+
+  // if (process.env.NODE_ENV !== "production" && process.server) {
+  //   const { startMSW } = await import("~/msw/msw-node");
+  //   startMSW();
+  // }
 });
