@@ -2,15 +2,9 @@ import { http, HttpResponse } from "msw";
 
 // Define your API handlers here
 export const handlers = [
-  // Example API handler - replace with your actual endpoints
-  http.get("/api/test", () => {
+  http.get("https://mockanapi.com/s/6773ca761e6f1a48a311752a/test2", () => {
     return HttpResponse.json({
-      message: "buzz",
-    });
-  }),
-  http.get("https://mockanapi.com/**", () => {
-    return HttpResponse.json({
-      message: "custom response for this test",
+      message: "Default",
     });
   }),
 ];
