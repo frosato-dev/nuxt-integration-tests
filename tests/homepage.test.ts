@@ -38,6 +38,10 @@ test("homepage with custom API response", async ({ page }) => {
 
   await page.goto("/");
 
+  // Wait for hydration to complete (copied from "nuxt-test-utils")
+  // https://github.com/nuxt/test-utils/blob/ed475c9fd497bb093796e5cf9cdcbdbb66bf0fe6/src/e2e/browser.ts#L69
+  await page.waitForFunction(() => window.useNuxtApp?.().isHydrating === false);
+
   // This should now show the custom response
   await expect(page.locator("data-testid=server")).toContainText(
     "Server override"
