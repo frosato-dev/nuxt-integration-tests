@@ -8,7 +8,9 @@ test("homepage navigation to demo-1", async ({ page }) => {
   await expect(page.locator("h1")).toContainText("Homepage");
 
   // Vérifier que nous sommes sur la page d'accueil
-  await expect(page.locator("data-testid=api")).toContainText("buzz");
+  await expect(page.locator("data-testid=api")).toContainText(
+    "This message is comming from remote API"
+  );
 
   // Cliquer sur le lien vers Demo 1
   await page.click('a[href="/demo-1"]');
