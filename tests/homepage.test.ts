@@ -19,16 +19,22 @@ test("homepage with custom API response", async ({ page }) => {
     }
   );
 
-  // Mock the client-side fetch
-  await page.route(
-    "https://mockanapi.com/s/6773ca761e6f1a48a311752a/test2",
-    async (route) => {
-      const json = {
-        message: "Client override",
-      };
-      await route.fulfill({ json });
-    }
-  );
+  // Mock the single client-side fetch
+  // await page.route(
+  //   "https://mockanapi.com/s/6773ca761e6f1a48a311752a/test2",
+  //   async (route) => {
+  //     const json = {
+  //       message: "Client override",
+  //     };
+  //     await route.fulfill({ json });
+  //   }
+  // );
+
+  // Use the recorded HAR file to mock Client side API responses
+  await page.routeFromHAR("./tests/homepage.har", {
+    url: "**/mockanapi.com/**",
+    update: false, // false = use HAR file, true = update HAR file
+  });
 
   await page.goto("/");
 
