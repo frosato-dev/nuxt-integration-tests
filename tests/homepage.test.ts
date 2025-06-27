@@ -2,15 +2,23 @@ import { test, expect } from "@playwright/test";
 import { http, HttpResponse } from "msw";
 import { server } from "~/msw/msw-node";
 
+const mockFetch = async (path: string, payload: any) => {
+  return fetch("http://localhost:3000/api/msw", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ path, payload }),
+  });
+};
+
 test("homepage with custom API response", async ({ page }) => {
-  // Should override the default handler for this specific test (not working)
-  // server.use(
-  //   http.get("https://mockanapi.com/s/6773ca761e6f1a48a311752a/test2", () => {
-  //     return HttpResponse.json({
-  //       message: "TOTO",
-  //     });
-  //   })
-  // );
+  const result = await mockFetch(
+    "https://mockanapi.com/s/6773ca761e6f1a48a311752a/test2",
+    {
+      message: "TOTO",
+    }
+  );
 
   await page.goto("/");
 
